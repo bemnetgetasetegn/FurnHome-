@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FURNHOME - Furniture Website</title>
+    <link rel="icon" type="image/svg+xml" href="/vite.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Open Sans', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom styles for mobile responsiveness */
+        @media (max-width: 768px) {
+            .mobile-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+                padding: 0.5rem 1rem;
+                background: #1f2937; /* Dark gray background */
+            }
+            
+            .hero-spacing {
+                margin-top: 1rem; /* Space between nav and hero on mobile */
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-50 font-sans">
+    <!-- Header -->
+    <div class="bg-white">
+        <!-- Top Bar - Light background -->
+<div class="bg-white py-2 px-4 md:border-b md:border-gray-200 hidden md:block">
+  <div class="max-w-7xl mx-auto flex justify-between items-center text-sm text-gray-600">
+    <div class="flex items-center">
+      <div class="flex items-center px-3 md:border-r md:border-gray-200">
+        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+          <path
+            d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z">
+          </path>
+        </svg>
+        <span>Phone: (+1) 123 - 456 - 7890</span>
+      </div>
+      <div class="flex items-center px-3">
+        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+          <path
+            d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z">
+          </path>
+        </svg>
+        <span>Email: info@Ourdomain.Com</span>
+      </div>
+    </div>
+    <div class="flex items-center">
+      <div class="flex items-center px-3 md:border-r md:border-gray-200">
+        <span>Currency: USD</span>
+        <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd"
+            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+            clip-rule="evenodd"></path>
+        </svg>
+      </div>
+      <div class="flex items-center px-3">
+        <span>MY ACCOUNT</span>
+        <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd"
+            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+            clip-rule="evenodd"></path>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Main Header -->
+<div class="py-4 px-4 md:bg-white bg-gray-900">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
+
+    <!-- Mobile header container for logo and hamburger -->
+    <div class="mobile-header flex w-full items-center justify-between md:hidden">
+      <!-- Logo -->
+      <div class="flex items-center space-x-2">
+        <div class="w-10 h-10 bg-teal-500 rounded-lg flex items-center justify-center">
+          <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+            <path
+              d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z">
+            </path>
+          </svg>
+        </div>
+        <span class="text-2xl font-bold text-white md:text-gray-800">
+          FURN<span class="text-teal-500">HOME</span>
+        </span>
+      </div>
+
+      <!-- Hamburger menu -->
+      <div class="flex flex-col justify-between w-6 h-5 cursor-pointer" id="hamburger-menu">
+        <span class="w-full h-0.5 bg-white md:bg-gray-800 rounded"></span>
+        <span class="w-full h-0.5 bg-white md:bg-gray-800 rounded"></span>
+        <span class="w-full h-0.5 bg-white md:bg-gray-800 rounded"></span>
+      </div>
+    </div>
+
+    <!-- Logo for desktop -->
+    <div class="hidden md:flex items-center space-x-2">
+      <div class="w-10 h-10 bg-teal-500 rounded-lg flex items-center justify-center">
+        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+          <path
+            d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z">
+          </path>
+        </svg>
+      </div>
+      <span class="text-2xl font-bold text-gray-800">
+        FURN<span class="text-teal-500">HOME</span>
+      </span>
+    </div>
+
+    <!-- Search Bar - Hidden on mobile -->
+    <div class="w-full md:max-w-md md:mx-8 hidden md:block">
+      <div class="relative">
+        <select
+          class="bg-gray-100 border-r border-gray-200 px-4 py-2 text-gray-600 absolute left-0 top-0 h-full z-10 rounded-l-lg text-sm">
+          <option>Category</option>
+        </select>
+        <input type="text" placeholder="Search..."
+          class="w-full pl-28 pr-12 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm">
+        <button
+          class="absolute right-0 top-0 h-full px-4 bg-teal-500 text-white rounded-r-lg hover:bg-teal-600 transition-colors">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd"
+              d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+              clip-rule="evenodd"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Shopping Cart - Hidden on mobile -->
+    <div
+      class="bg-teal-500 text-white px-4 py-2 rounded-lg flex items-center space-x-3 hover:bg-teal-600 transition-colors cursor-pointer hidden md:flex">
+      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+        <path
+          d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z">
+        </path>
+      </svg>
+      <div>
+        <div class="text-xs font-medium">SHOPPING CART</div>
+        <div class="text-xs">(02) Items - $200.00</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Navigation - Dark background -->
+<nav class="bg-gray-900 md:py-3 relative">
+  <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+    <div class="hidden md:flex items-center justify-center space-x-4 lg:space-x-8 text-sm text-gray-300">
+      <a href="#"
+        class="relative px-3 text-teal-400 font-medium hover:text-teal-300 transition-colors after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-teal-400 after:left-0 after:-bottom-1 after:transition-all after:duration-300 hover:after:w-full">HOME</a>
+      <a href="#"
+        class="relative px-3 hover:text-teal-300 transition-colors after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-teal-400 after:left-0 after:-bottom-1 after:transition-all after:duration-300 hover:after:w-full">LIVING
+        ROOM</a>
+      <a href="#"
+        class="relative px-3 hover:text-teal-300 transition-colors after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-teal-400 after:left-0 after:-bottom-1 after:transition-all after:duration-300 hover:after:w-full">BED
+        ROOM</a>
+      <a href="#"
+        class="relative px-3 hover:text-teal-300 transition-colors after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-teal-400 after:left-0 after:-bottom-1 after:transition-all after:duration-300 hover:after:w-full">SOFAS</a>
+      <a href="#"
+        class="relative px-3 hover:text-teal-300 transition-colors flex items-center after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-teal-400 after:left-0 after:-bottom-1 after:transition-all after:duration-300 hover:after:w-full">
+        <span>LATEST PRODUCT</span>
+      </a>
+      <a href="#"
+        class="relative px-3 hover:text-teal-300 transition-colors after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-teal-400 after:left-0 after:-bottom-1 after:transition-all after:duration-300 hover:after:w-full">BEST
+        SELLER</a>
+      <a href="#"
+        class="relative px-3 hover:text-teal-300 transition-colors after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-teal-400 after:left-0 after:-bottom-1 after:transition-all after:duration-300 hover:after:w-full">LATEST
+        NEWS</a>
+      <a href="#"
+        class="relative px-3 hover:text-teal-300 transition-colors after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-teal-400 after:left-0 after:-bottom-1 after:transition-all after:duration-300 hover:after:w-full">CONTACT
+        US</a>
+    </div>
+  </div>
+
+  <!-- Mobile menu - Hidden by default -->
+  <div class="hidden flex-col absolute top-full left-0 right-0 bg-gray-900 p-4 z-50 space-y-3" id="mobile-menu">
+    <a href="#" class="py-2 text-teal-400 font-medium">HOME</a>
+    <a href="#" class="py-2 text-white">LIVING ROOM</a>
+    <a href="#" class="py-2 text-white">BED ROOM</a>
+    <a href="#" class="py-2 text-white">SOFAS</a>
+    <a href="#" class="py-2 text-white flex items-center">
+      <span>LATEST PRODUCT</span>
+      <span class="bg-teal-500 text-white text-xs px-2 py-1 rounded ml-2">Latest</span>
+    </a>
+    <a href="#" class="py-2 text-white">BEST SELLER</a>
+    <a href="#" class="py-2 text-white">LATEST NEWS</a>
+    <a href="#" class="py-2 text-white">CONTACT US</a>
+  </div>
+</nav>
+
+
+    <!-- Hero Section with Carousel - Added spacing class -->
+    <section id="hero" class="min-h-screen bg-blue-50 relative overflow-hidden flex items-center justify-center hero-spacing">
+        <!-- Carousel Slides Container -->
+        <div id="hero-slides-container" class="w-full h-full"></div>
+        
+        <!-- Navigation Dots -->
+        <div class="absolute bottom-8 left-0 right-0 flex justify-center space-x-3 z-10">
+            <button class="w-3 h-3 rounded-full bg-gray-400 hover:bg-teal-500 transition-colors dot" data-index="0"></button>
+            <button class="w-3 h-3 rounded-full bg-gray-400 hover:bg-teal-500 transition-colors dot" data-index="1"></button>
+            <button class="w-3 h-3 rounded-full bg-gray-400 hover:bg-teal-500 transition-colors dot" data-index="2"></button>
+        </div>
+    </section>
+
+    <script>
+        // JSON data for hero section
+        const heroData = [
+            {
+                id: 1,
+                title: "New Way To Design Your Home",
+                description: "I never thought I could feel so free! Well we're movin' on up to the east side to a deluxe apartment in the sky just two good ol' boys Never meanin'.",
+                image: "./pics/sofa1.png",
+                backgroundColor: "bg-blue-50"
+            },
+            {
+                id: 2,
+                title: "We Like To Work A Lot With Wood",
+                description: "I never thought I could feel so free! Well we're movin' on up to the east side to a deluxe apartment in the sky just two good ol' boys Never meanin'.",
+                image: "./pics/sofa3.png",
+                backgroundColor: "bg-gray-100"
+            },
+            {
+                id: 3,
+                title: "Give Us Something To Assemble",
+                description: "I never thought I could feel so free! Well we're movin' on up to the east side to a deluxe apartment in the sky just two good ol' boys Never meanin'.",
+                image: "./pics/sofa2.png",
+                backgroundColor: "bg-orange-50"
+            }
+        ];
+
+        // Function to generate hero slides from JSON data
+        function generateHeroSlides() {
+            const container = document.getElementById('hero-slides-container');
+            
+            heroData.forEach((slide, index) => {
+                const slideElement = document.createElement('div');
+                slideElement.className = `hero-slide absolute inset-0 transition-opacity duration-1000 ease-in-out flex items-center justify-center text-center pt-20 px-4 ${index === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0'}`;
+                slideElement.setAttribute('data-bg', slide.backgroundColor);
+                slideElement.setAttribute('data-index', index);
+                
+                slideElement.innerHTML = `
+                    <div class="max-w-4xl mx-auto px-4">
+                        <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-6 transition-all duration-700 ease-out">${slide.title}</h1>
+                        <p class="text-lg text-gray-600 mb-10 max-w-2xl mx-auto transition-all duration-700 ease-out delay-150">${slide.description}</p>
+                        <a href="#" class="shop-now-btn border-2 border-gray-800 text-gray-800 px-8 py-3 font-bold hover:bg-gray-800 hover:text-white transition-colors transition-all duration-700 ease-out delay-300">SHOP NOW</a>
+                        <div class="mt-10 transition-all duration-700 ease-out delay-450">
+                            <img src="${slide.image}" alt="${slide.title}" class="mx-auto max-w-full h-40 md:h-80 object-contain">
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(slideElement);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Generate slides from JSON data
+            generateHeroSlides();
+            
+            const slides = document.querySelectorAll('.hero-slide');
+            const dots = document.querySelectorAll('.dot');
+            const hamburgerMenu = document.getElementById('hamburger-menu');
+            const mobileMenu = document.getElementById('mobile-menu');
+            let currentSlide = 0;
+            let slideInterval;
+            
+            // Initialize first slide
+            updateSlideBackground(0);
+            updateActiveDot(0);
+            
+            // Mobile menu toggle
+            hamburgerMenu.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+                mobileMenu.classList.toggle('flex');
+            });
+            
+            // Add click events to dots
+            dots.forEach(dot => {
+                dot.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    if (index !== currentSlide) {
+                        showSlide(index);
+                    }
+                });
+            });
+            
+            // Function to show a specific slide
+            function showSlide(index) {
+                // Reset all animations
+                resetSlideAnimations(currentSlide);
+                
+                // Hide current slide
+                slides[currentSlide].classList.remove('opacity-100', 'z-10');
+                slides[currentSlide].classList.add('opacity-0', 'z-0');
+                
+                // Show new slide
+                slides[index].classList.remove('opacity-0', 'z-0');
+                slides[index].classList.add('opacity-100', 'z-10');
+                
+                // Update background
+                updateSlideBackground(index);
+                
+                // Activate animations for the new slide
+                activateSlideAnimations(index);
+                
+                // Update current slide and active dot
+                currentSlide = index;
+                updateActiveDot(index);
+            }
+            
+            // Function to update background based on slide
+            function updateSlideBackground(index) {
+                const bgClass = slides[index].getAttribute('data-bg');
+                document.getElementById('hero').className = `min-h-screen relative overflow-hidden flex items-center justify-center hero-spacing ${bgClass}`;
+            }
+            
+            // Function to update active dot
+            function updateActiveDot(index) {
+                dots.forEach(dot => {
+                    dot.classList.remove('bg-teal-500', 'w-8');
+                    dot.classList.add('bg-gray-400', 'w-3');
+                });
+                dots[index].classList.remove('bg-gray-400', 'w-3');
+                dots[index].classList.add('bg-teal-500', 'w-8');
+            }
+            
+            // Function to reset animations for a slide
+            function resetSlideAnimations(index) {
+                const slideElement = slides[index];
+                const animatedElements = slideElement.querySelectorAll('h1, p, a, .mt-10');
+                
+                animatedElements.forEach(el => {
+                    el.classList.remove('opacity-100', 'translate-x-0');
+                    el.classList.add('opacity-0');
+                    if (index % 2 === 0) {
+                        el.classList.add('translate-x-10');
+                    } else {
+                        el.classList.add('-translate-x-10');
+                    }
+                });
+            }
+            
+            // Function to activate animations for the current slide
+            function activateSlideAnimations(index) {
+                const slideElement = slides[index];
+                const animatedElements = slideElement.querySelectorAll('h1, p, a, .mt-10');
+                
+                // Reset all animations first
+                animatedElements.forEach(el => {
+                    el.classList.remove('opacity-100', 'translate-x-0');
+                    el.classList.add('opacity-0');
+                    if (index % 2 === 0) {
+                        el.classList.add('translate-x-10');
+                    } else {
+                        el.classList.add('-translate-x-10');
+                    }
+                });
+                
+                // Animate elements with delays
+                setTimeout(() => {
+                    animatedElements[0].classList.remove('opacity-0');
+                    if (index % 2 === 0) {
+                        animatedElements[0].classList.remove('translate-x-10');
+                    } else {
+                        animatedElements[0].classList.remove('-translate-x-10');
+                    }
+                    animatedElements[0].classList.add('opacity-100', 'translate-x-0');
+                }, 50);
+                
+                setTimeout(() => {
+                    animatedElements[1].classList.remove('opacity-0');
+                    if (index % 2 === 0) {
+                        animatedElements[1].classList.remove('translate-x-10');
+                    } else {
+                        animatedElements[1].classList.remove('-translate-x-10');
+                    }
+                    animatedElements[1].classList.add('opacity-100', 'translate-x-0');
+                }, 300);
+                
+                setTimeout(() => {
+                    animatedElements[2].classList.remove('opacity-0');
+                    if (index % 2 === 0) {
+                        animatedElements[2].classList.remove('translate-x-10');
+                    } else {
+                        animatedElements[2].classList.remove('-translate-x-10');
+                    }
+                    animatedElements[2].classList.add('opacity-100', 'translate-x-0');
+                }, 550);
+                
+                setTimeout(() => {
+                    animatedElements[3].classList.remove('opacity-0');
+                    if (index % 2 === 0) {
+                        animatedElements[3].classList.remove('translate-x-10');
+                    } else {
+                        animatedElements[3].classList.remove('-translate-x-10');
+                    }
+                    animatedElements[3].classList.add('opacity-100', 'translate-x-0');
+                }, 800);
+            }
+            
+            // Function to go to next slide
+            function nextSlide() {
+                let nextIndex = (currentSlide + 1) % slides.length;
+                showSlide(nextIndex);
+            }
+            
+            // Function to start auto sliding
+            function startSlideShow() {
+                slideInterval = setInterval(nextSlide, 5000); // Change slide every 5 seconds
+            }
+            
+            // Function to stop auto sliding
+            function stopSlideShow() {
+                clearInterval(slideInterval);
+            }
+            
+            // Start the slideshow
+            startSlideShow();
+            
+            // Pause slideshow when user hovers over carousel
+            document.getElementById('hero').addEventListener('mouseenter', stopSlideShow);
+            document.getElementById('hero').addEventListener('mouseleave', startSlideShow);
+            
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!event.target.closest('#mobile-menu') && !event.target.closest('#hamburger-menu') && !mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenu.classList.remove('flex');
+                }
+            });
+            
+            // Initialize first slide animations
+            setTimeout(() => {
+                activateSlideAnimations(0);
+            }, 100);
+        });
+    </script>
+
+
+<section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+        <!-- Section Title -->
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">OUR PRODUCTS</h2>
+            <div class="w-16 h-1 bg-teal-500 mx-auto"></div>
+        </div>
+
+        <!-- Product Categories -->
+        <div class="flex justify-center mb-12">
+            <div class="flex space-x-6">
+                <button data-category="latest" class="category-btn font-medium text-gray-700 border-b-2 border-gray-300 pb-2 transition-colors hover:text-teal-600 hover:border-teal-600">Latest Products</button>
+                <button data-category="featured" class="category-btn font-medium text-gray-700 border-b-2 border-transparent pb-2 transition-colors hover:text-teal-600 hover:border-teal-600">Featured</button>
+                <button data-category="bestseller" class="category-btn font-medium text-gray-700 border-b-2 border-transparent pb-2 transition-colors hover:text-teal-600 hover:border-teal-600">Best Seller</button>
+            </div>
+        </div>
+
+        <!-- Products Grid -->
+        <div id="products-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Products will be loaded here from JSON -->
+        </div>
+    </div>
+
+    <script>
+        // JSON data for products
+        const productsData = [
+            {
+                id: 1,
+                name: "MODERN ICEZ CHAIR",
+                price: 18.00,
+                originalPrice: null,
+                image: "https://placehold.co/400x500/20c997/ffffff?text=Blue+Chair",
+                tags: ["NEW", "15%"],
+                category: "latest"
+            },
+            {
+                id: 2,
+                name: "OFFICE CHAIRS",
+                price: 18.00,
+                originalPrice: null,
+                image: "https://placehold.co/400x500/f56565/ffffff?text=Orange+Chair",
+                tags: ["20%"],
+                category: "featured"
+            },
+            {
+                id: 3,
+                name: "LUXURY CHAIRS",
+                price: 55.00,
+                originalPrice: 76.00,
+                image: "https://placehold.co/400x500/d2691e/ffffff?text=Brown+Chair",
+                tags: ["NEW", "25%"],
+                category: "bestseller"
+            },
+            {
+                id: 4,
+                name: "ERGONOMIC DESK CHAIR",
+                price: 125.00,
+                originalPrice: 150.00,
+                image: "https://placehold.co/400x500/4f46e5/ffffff?text=Purple+Chair",
+                tags: ["30%"],
+                category: "featured"
+            },
+            {
+                id: 5,
+                name: "MINIMALIST STOOL",
+                price: 45.00,
+                originalPrice: null,
+                image: "https://placehold.co/400x500/475569/ffffff?text=Gray+Stool",
+                tags: ["NEW"],
+                category: "latest"
+            },
+            {
+                id: 6,
+                name: "EXECUTIVE LEATHER CHAIR",
+                price: 220.00,
+                originalPrice: 275.00,
+                image: "https://placehold.co/400x500/1e293b/ffffff?text=Black+Chair",
+                tags: ["20%"],
+                category: "bestseller"
+            }
+        ];
+
+        // Function to generate product cards from JSON data
+        function generateProductCards(products) {
+            const container = document.getElementById('products-grid');
+            container.innerHTML = '';
+            
+            products.forEach((product) => {
+                const productCard = document.createElement('div');
+                productCard.className = 'group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1';
+                
+                let newTag = '';
+                let discountTag = '';
+                
+                if (product.tags.includes('NEW')) {
+                    newTag = '<div class="absolute top-3 left-3"><span class="bg-emerald-500 text-white text-xs font-bold px-2 py-1 rounded">NEW</span></div>';
+                }
+                
+                // Find discount tag if exists
+                const discountTagValue = product.tags.find(tag => tag.includes('%'));
+                if (discountTagValue) {
+                    discountTag = `<div class="absolute top-3 right-3"><span class="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">${discountTagValue}</span></div>`;
+                }
+                
+                let priceDisplay = `<span class="text-lg font-bold text-red-500">$${product.price.toFixed(2)}</span>`;
+                if (product.originalPrice) {
+                    priceDisplay = `<span class="text-lg font-bold text-red-500">$${product.price.toFixed(2)}</span> <span class="text-sm text-gray-500 line-through ml-2">$${product.originalPrice.toFixed(2)}</span>`;
+                }
+                
+                productCard.innerHTML = `
+                    <div class="relative overflow-hidden rounded-t-lg">
+                        ${newTag}
+                        ${discountTag}
+                        <img src="${product.image}" alt="${product.name}" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="p-4 text-center">
+                        <h3 class="text-md font-medium text-gray-800 mb-2">${product.name}</h3>
+                        <div class="mt-2">
+                            ${priceDisplay}
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(productCard);
+            });
+        }
+
+        // Function to filter products by category
+        function filterProducts(category) {
+            if (category === 'all') {
+                return productsData;
+            }
+            return productsData.filter(product => product.category === category);
+        }
+
+        // Function to update active category button
+        function updateActiveCategory(activeCategory) {
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                if (btn.dataset.category === activeCategory) {
+                    btn.classList.add('border-teal-600', 'text-teal-600');
+                    btn.classList.remove('border-transparent');
+                } else {
+                    btn.classList.remove('border-teal-600', 'text-teal-600');
+                    btn.classList.add('border-transparent');
+                }
+            });
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load all products initially
+            generateProductCards(productsData);
+            
+            // Add event listeners to category buttons
+            document.querySelectorAll('.category-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const category = this.dataset.category;
+                    const filteredProducts = filterProducts(category);
+                    generateProductCards(filteredProducts);
+                    updateActiveCategory(category);
+                });
+            });
+        });
+    </script>
+</section>
+</body>
+</html>
