@@ -644,7 +644,7 @@
 
     <!-- Right Content -->
     <div class="opacity-0 transform translate-x-20 transition-all duration-2000 ease-out flex" id="deal-right">
-      <div class="bg-blue-600 text-white p-10 flex flex-col justify-center w-full h-full">
+      <div class="bg-cover bg-center text-white p-10 flex flex-col justify-center w-full h-full relative" style="background-image: url('https://images.unsplash.com/photo-1541558869434-2840d308329a?q=80&w=869&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')">
         <h2 class="text-2xl font-bold text-center mb-4">HOT DEALS OF THE DAY</h2>
         <p class="text-sm mb-6 text-center ">Its a neighborly day in this beautywood a neighborly day for a beauty. Would you be mine could you be mine now were up in the big leagues getting</p>
         
@@ -697,7 +697,637 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
-</script>
+<section class="py-16 bg-white" id="latest-products-section">
+    <div class="max-w-7xl mx-auto px-4">
+        <!-- Section Title -->
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">LATEST PRODUCTS</h2>
+            <div class="w-16 h-1 bg-teal-500 mx-auto"></div>
+        </div>
+
+        <!-- Products Grid -->
+        <div id="latest-products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Products will be loaded here from JSON -->
+        </div>
+    </div>
+
+    <script>
+        // JSON data for latest products
+        const latestProductsData = [
+            {
+                id: 1,
+                name: "PLASTIC NET CHAIRS",
+                price: 45.00,
+                originalPrice: 55.00,
+                image: "./pics/chair1.png",
+                tags: ["NEW", "15%"],
+                category: "chairs",
+                link: "http://dietmonducent.com/usm/formations/machine-net.html"
+            },
+            {
+                id: 2,
+                name: "OFFICIAL CHAIRS",
+                price: 120.00,
+                originalPrice: null,
+                image: "./pics/chair1.png",
+                tags: ["NEW"],
+                category: "chairs",
+                link: "#"
+            },
+            {
+                id: 3,
+                name: "LUXURY CHAIRS",
+                price: 220.00,
+                originalPrice: 275.00,
+                image: "./pics/product-1.jpg",
+                tags: ["NEW", "20%"],
+                category: "chairs",
+                link: "#"
+            },
+            {
+                id: 4,
+                name: "MODERN ICEZ CHAIR",
+                price: 85.00,
+                originalPrice: 100.00,
+                image: "./pics/product-2.jpg",
+                tags: ["15%"],
+                category: "chairs",
+                link: "#"
+            }
+        ];
+
+        // Function to generate product cards from JSON data
+        function generateLatestProductCards() {
+            const container = document.getElementById('latest-products-grid');
+            container.innerHTML = '';
+            
+            latestProductsData.forEach((product, index) => {
+                const productCard = document.createElement('div');
+                productCard.className = 'group bg-white rounded-lg overflow-hidden transition-all duration-300 opacity-0 translate-y-10 transition-all duration-500 ease-out';
+                productCard.style.transitionDelay = `${index * 100}ms`;
+                
+                let newTag = '';
+                let discountTag = '';
+                
+                if (product.tags.includes('NEW')) {
+                    newTag = '<div class="absolute top-4 left-4"><span class="bg-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-md">NEW</span></div>';
+                }
+                
+                // Find discount tag if exists
+                const discountTagValue = product.tags.find(tag => tag.includes('%'));
+                if (discountTagValue) {
+                    discountTag = `<div class="absolute top-4 right-4"><span class="bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-md">${discountTagValue}</span></div>`;
+                }
+                
+                let priceDisplay = `<span class="text-lg font-bold text-red-500">$${product.price.toFixed(2)}</span>`;
+                if (product.originalPrice) {
+                    priceDisplay = `
+                        <div class="flex items-center justify-center space-x-2">
+                            <span class="text-lg font-bold text-red-500">$${product.price.toFixed(2)}</span>
+                            <span class="text-sm text-gray-500 line-through">$${product.originalPrice.toFixed(2)}</span>
+                        </div>
+                    `;
+                }
+                
+                productCard.innerHTML = `
+                    <div class="relative overflow-hidden bg-gray-100">
+                        ${newTag}
+                        ${discountTag}
+                        <img src="${product.image}" alt="${product.name}" class="w-full h-64 object-contain group-hover:scale-105 transition-transform duration-300 p-4">
+                        <div class="absolute inset-0 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                            <button class="bg-white rounded-full p-2 shadow-md hover:bg-teal-50">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                </svg>
+                            </button>
+                            <button class="bg-white rounded-full p-2 shadow-md hover:bg-teal-50">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-5 text-center border-t border-gray-100">
+                        <h3 class="text-md font-semibold text-gray-800 mb-2">${product.name}</h3>
+                        <div class="mt-2">
+                            ${priceDisplay}
+                        </div>
+                        <a href="${product.link}" class="mt-4 inline-block bg-teal-500 hover:bg-teal-600 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors">
+                            ADD TO CART
+                        </a>
+                    </div>
+                `;
+                
+                container.appendChild(productCard);
+            });
+        }
+
+        // Function to animate products when scrolled into view
+        function animateProductsOnScroll() {
+            const section = document.getElementById('latest-products-section');
+            const products = section.querySelectorAll('#latest-products-grid > div');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        products.forEach((product, index) => {
+                            setTimeout(() => {
+                                product.classList.remove('opacity-0', 'translate-y-10');
+                                product.classList.add('opacity-100', 'translate-y-0');
+                            }, index * 100);
+                        });
+                        // Stop observing after animation
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+            
+            observer.observe(section);
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            generateLatestProductCards();
+            animateProductsOnScroll();
+        });
+    </script>
+</section>
+
+
+<section class="py-16 bg-gray-50" id="latest-news-section">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">LATEST NEWS</h2>
+            <div class="w-16 h-1 bg-teal-500 mx-auto"></div>
+        </div>
+
+        <div id="news-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            </div>
+    </div>
+
+    <script>
+        // JSON data for latest news
+        const newsData = [
+            {
+                id: 1,
+                titleLine1: "HERE'S THE STORY OF MAN BRADY",
+                titleLine2: "WHO BUSY",
+                date: "APRIL 27TH, 2016",
+                image: "https://images.unsplash.com/photo-1524758631624-e2822e304c36?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                link: "#",
+                alt: "Man Brady story"
+            },
+            {
+                id: 2,
+                titleLine1: "COME AND DANCE ON OUR",
+                titleLine2: "FLOOR TAKE STEP",
+                date: "APRIL 27TH, 2016",
+                image: "https://images.unsplash.com/photo-1493663284031-b7e3aaa4c4b1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                link: "#",
+                alt: "Dance floor"
+            },
+            {
+                id: 3,
+                titleLine1: "THEY WERE FOUR MEN LIVING ALL",
+                titleLine2: "TOGETHER YET",
+                date: "APRIL 27TH, 2016",
+                image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                link: "#",
+                alt: "Four men living together"
+            }
+        ];
+
+        // Function to generate news cards from JSON data
+        function generateNewsCards() {
+            const container = document.getElementById('news-grid');
+            container.innerHTML = '';
+            
+            newsData.forEach((news, index) => {
+                const newsCard = document.createElement('div');
+                newsCard.className = `news-card relative bg-white rounded-none overflow-hidden opacity-0 -translate-y-10 transition-all duration-700 shadow-md`;
+                newsCard.style.transitionDelay = `${index * 100}ms`;
+                
+                newsCard.innerHTML = `
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="${news.image}" alt="${news.alt}" class="w-full h-full object-cover">
+                        <div class="absolute top-0 left-0 p-3">
+                            <svg class="w-8 h-8 text-teal-500 bg-white p-1 rounded-full shadow" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M9 2a1 1 0 00-1 1v1H5a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V6a2 2 0 00-2-2h-3V3a1 1 0 10-2 0v1H9V3a1 1 0 00-1-1zm0 2h2v1H9V4zm0 2v1h2V6H9zm-4 4h10v6H5V10z" clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-4 text-center relative z-10">
+                        <div class="absolute inset-x-0 bottom-full mb-2 flex justify-center">
+                            <span class="text-sm text-white bg-teal-500 px-3 py-1 rounded-full uppercase tracking-wide font-semibold">${news.date}</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-1 leading-tight mt-6">${news.titleLine1}</h3>
+                        <h3 class="text-xl font-bold text-gray-800 mb-4 leading-tight">${news.titleLine2}</h3>
+                    </div>
+                `;
+                
+                container.appendChild(newsCard);
+            });
+        }
+
+        // Function to animate news cards when scrolled into view
+        function animateNewsOnScroll() {
+            const section = document.getElementById('latest-news-section');
+            const newsCards = section.querySelectorAll('.news-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        newsCards.forEach((card) => {
+                            card.classList.remove('opacity-0', '-translate-y-10');
+                            card.classList.add('opacity-100', 'translate-y-0');
+                        });
+                        // Stop observing after animation
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+            
+            observer.observe(section);
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            generateNewsCards();
+            animateNewsOnScroll();
+        });
+    </script>
+</section>
+
+
+
+<section class="min-h-screen flex items-center justify-center relative bg-cover bg-center" id="newsletter-section" style="background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1032&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
+    <div class="max-w-4xl mx-auto px-4 w-full">
+        <!-- Newsletter content will be populated by JavaScript -->
+        <div id="newsletter-content" class="text-center">
+            <!-- Content will be generated here -->
+        </div>
+    </div>
+
+    <script>
+        // JSON data for newsletter section
+        const newsletterData = {
+            title: "Our Latest Collection",
+            discount: "SAVE 50% OFF SALE",
+            description: "Be the first to know about latest and modern furniture",
+            placeholder: "Your Email Address",
+            buttonText: "SIGN UP"
+        };
+
+        // Function to generate newsletter content from JSON data
+        function generateNewsletterContent() {
+            const container = document.getElementById('newsletter-content');
+            
+            container.innerHTML = `
+                <h2 class="text-5xl italic text-white md:text-6xl lg:text-5xl font-bold mb-6 opacity-0 translate-y-10 transition-all duration-700">${newsletterData.title}</h2>
+                <div class="text-white text-4xl md:text-5xl lg:text-6xl font-bold mb-8 opacity-0 translate-y-10 transition-all duration-700" style="transition-delay: 100ms">${newsletterData.discount}</div>
+                <p class="text-white text-lg md:text-xl mb-10 max-w-3xl mx-auto opacity-0 translate-y-10 transition-all duration-700" style="transition-delay: 200ms">${newsletterData.description}</p>
+                
+                <div class="flex flex-col sm:flex-row justify-center items-center max-w-2xl mx-auto opacity-0 translate-y-10 transition-all duration-700" style="transition-delay: 300ms">
+                    <input 
+                        type="email" 
+                        placeholder="${newsletterData.placeholder}" 
+                        class="w-full sm:flex-1 px-6 py-4 text-lg rounded-l sm:rounded-l-lg rounded-r sm:rounded-r-none border-0 text-gray-800 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    >
+                    <button class="w-full sm:w-auto bg-teal-500 hover:bg-teal-600 text-white font-bold px-8 py-4 text-lg rounded-r sm:rounded-r-lg rounded-l sm:rounded-l-none mt-4 sm:mt-0 transition-colors">
+                        ${newsletterData.buttonText}
+                    </button>
+                </div>
+            `;
+        }
+
+        // Function to animate newsletter content when scrolled into view
+        function animateNewsletterOnScroll() {
+            const section = document.getElementById('newsletter-section');
+            const elements = section.querySelectorAll('#newsletter-content > *');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        elements.forEach((element) => {
+                            element.classList.remove('opacity-0', 'translate-y-10');
+                            element.classList.add('opacity-100', 'translate-y-0');
+                        });
+                        // Stop observing after animation
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+            
+            observer.observe(section);
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            generateNewsletterContent();
+            animateNewsletterOnScroll();
+        });
+    </script>
+</section>
+
+<section class="py-16 bg-white" id="testimonial-section">
+    <div class="max-w-7xl mx-auto px-4">
+        <!-- Section Title -->
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4 opacity-0 translate-y-10 transition-all duration-700">WORDS FROM CLIENTS</h2>
+            <div class="w-16 h-1 bg-teal-500 mx-auto opacity-0 translate-y-10 transition-all duration-700" style="transition-delay: 100ms"></div>
+        </div>
+
+        <!-- Testimonials Container -->
+        <div class="relative overflow-hidden">
+            <div id="testimonials-container" class="flex transition-transform duration-500 ease-in-out opacity-0 translate-y-10 transition-all duration-700" style="transition-delay: 200ms">
+                <!-- Testimonials will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Navigation Dots -->
+        <div class="flex justify-center mt-8 space-x-3 opacity-0 translate-y-10 transition-all duration-700" style="transition-delay: 300ms">
+            <button class="w-3 h-3 rounded-full bg-gray-400 hover:bg-teal-500 transition-colors testimonial-dot" data-index="0"></button>
+            <button class="w-3 h-3 rounded-full bg-gray-400 hover:bg-teal-500 transition-colors testimonial-dot" data-index="1"></button>
+            <button class="w-3 h-3 rounded-full bg-gray-400 hover:bg-teal-500 transition-colors testimonial-dot" data-index="2"></button>
+        </div>
+    </div>
+
+    <script>
+        // JSON data for testimonials (9 Ethiopian customers)
+        const testimonialsData = [
+            {
+                id: 1,
+                name: "TEWODROS KEBEDE",
+                text: "Growth of week with you. Well to a deluxe apartment in the sky, These days are all shots them while movin on up to the east side.",
+                image: "https://images.unsplash.com/photo-1540569876033-6e5d046a1d77?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"
+            },
+            {
+                id: 2,
+                name: "SELAM TADESSE",
+                text: "These happy boys are yours and with me oh baby, Goodbye grey to a deluxe apartment in the sky mine Happy boys.",
+                image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"
+            },
+            {
+                id: 3,
+                name: "AMANUEL HAILE",
+                text: "Movin up to the My hello blue. There's nothing can stop me now. Well we're movin' on up to the east side to a deluxe apartment.",
+                image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"
+            },
+            {
+                id: 4,
+                name: "HIWOT MEKONNEN",
+                text: "The furniture quality is exceptional. I've never been more satisfied with a purchase. It transformed my living space completely.",
+                image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"
+            },
+            {
+                id: 5,
+                name: "BEKELE ABEBE",
+                text: "Just like my basketball career, this furniture is top-tier quality. Would recommend to anyone looking for premium home furnishings.",
+                image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"
+            },
+            {
+                id: 6,
+                name: "ZEWDITU GIRMA",
+                text: "From my home to yours, this furniture brings elegance and style. It's like having a piece of luxury in your living room.",
+                image: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"
+            },
+            {
+                id: 7,
+                name: "YONAS TESFAYE",
+                text: "Even Tony Stark would be impressed with this furniture. It's innovative, stylish, and built to last. Perfect for any modern home.",
+                image: "https://images.unsplash.com/photo-1507680465149-efb5c35c8705?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"
+            },
+            {
+                id: 8,
+                name: "MESERET HAILE",
+                text: "I'm never, ever, ever buying furniture from anywhere else. Like, ever. This is the best furniture I've ever owned.",
+                image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"
+            },
+            {
+                id: 9,
+                name: "KIBROM GEBRE",
+                text: "This furniture is like my basketball career - built to last and always performs at the highest level. Definitely worth the investment.",
+                image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"
+            }
+        ];
+
+        // Carousel state
+        let currentTestimonial = 0;
+        let testimonialInterval;
+
+        // Function to generate testimonial slides (3 testimonials per slide)
+        function generateTestimonialSlides() {
+            const container = document.getElementById('testimonials-container');
+            container.innerHTML = '';
+            
+            // Create 3 slides with 3 testimonials each
+            for (let slideIndex = 0; slideIndex < 3; slideIndex++) {
+                const testimonialSlide = document.createElement('div');
+                testimonialSlide.className = 'min-w-full';
+                testimonialSlide.setAttribute('data-index', slideIndex);
+                
+                let slideContent = '<div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-4">';
+                
+                // Add 3 testimonials to this slide
+                for (let i = 0; i < 3; i++) {
+                    const testimonialIndex = slideIndex * 3 + i;
+                    if (testimonialIndex < testimonialsData.length) {
+                        const testimonial = testimonialsData[testimonialIndex];
+                        
+                        slideContent += `
+                            <div class="testimonial-card bg-gray-50 rounded-lg p-8 opacity-0 translate-y-10 transition-all duration-700" style="transition-delay: ${400 + (i * 100)}ms">
+                                <div class="text-center mb-6">
+                                    <div class="w-20 h-20 mx-auto rounded-full overflow-hidden border-4 border-white shadow-md">
+                                        <img src="${testimonial.image}" alt="${testimonial.name}" class="w-full h-full object-cover">
+                                    </div>
+                                </div>
+                                <p class="text-gray-600 text-center italic mb-6 leading-relaxed">"${testimonial.text}"</p>
+                                <div class="text-center">
+                                    <h4 class="font-bold text-gray-800">${testimonial.name}</h4>
+                                    <div class="text-teal-500 text-sm mt-2">HAPPY CUSTOMER</div>
+                                </div>
+                            </div>
+                        `;
+                    }
+                }
+                
+                slideContent += '</div>';
+                testimonialSlide.innerHTML = slideContent;
+                container.appendChild(testimonialSlide);
+            }
+        }
+
+        // Function to show a specific testimonial slide
+        function showTestimonial(index) {
+            const container = document.getElementById('testimonials-container');
+            const dots = document.querySelectorAll('.testimonial-dot');
+            
+            // Update container position
+            container.style.transform = `translateX(-${index * 100}%)`;
+            
+            // Update active dot
+            dots.forEach(dot => {
+                dot.classList.remove('bg-teal-500', 'w-8');
+                dot.classList.add('bg-gray-400', 'w-3');
+            });
+            dots[index].classList.remove('bg-gray-400', 'w-3');
+            dots[index].classList.add('bg-teal-500', 'w-8');
+            
+            // Update current testimonial index
+            currentTestimonial = index;
+        }
+
+        // Function to go to next testimonial
+        function nextTestimonial() {
+            let nextIndex = (currentTestimonial + 1) % 3; // 3 slides total
+            showTestimonial(nextIndex);
+        }
+
+        // Function to start auto sliding
+        function startTestimonialSlideShow() {
+            testimonialInterval = setInterval(nextTestimonial, 10000); // Change every 10 seconds
+        }
+
+        // Function to stop auto sliding
+        function stopTestimonialSlideShow() {
+            clearInterval(testimonialInterval);
+        }
+
+        // Function to animate testimonial section when scrolled into view
+        function animateTestimonialOnScroll() {
+            const section = document.getElementById('testimonial-section');
+            const elements = section.querySelectorAll('.opacity-0');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        elements.forEach((element) => {
+                            element.classList.remove('opacity-0', 'translate-y-10');
+                            element.classList.add('opacity-100', 'translate-y-0');
+                        });
+                        // Start the slideshow only when section is visible
+                        startTestimonialSlideShow();
+                        // Stop observing after animation
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+            
+            observer.observe(section);
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            generateTestimonialSlides();
+            
+            // Initialize first testimonial
+            showTestimonial(0);
+            
+            // Add scroll animation
+            animateTestimonialOnScroll();
+            
+            // Add click events to dots
+            document.querySelectorAll('.testimonial-dot').forEach(dot => {
+                dot.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    if (index !== currentTestimonial) {
+                        showTestimonial(index);
+                    }
+                });
+            });
+            
+            // Pause slideshow when user interacts with carousel
+            const testimonialSection = document.getElementById('testimonial-section');
+            testimonialSection.addEventListener('mouseenter', stopTestimonialSlideShow);
+            testimonialSection.addEventListener('mouseleave', startTestimonialSlideShow);
+        });
+    </script>
+</section>
+
+
+<footer class="bg-gray-900 text-white py-16">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+            <!-- About the Store -->
+            <div class="col-span-2">
+                <div class="flex items-center space-x-2 mb-6">
+                    <div class="w-10 h-10 bg-teal-500 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                        </svg>
+                    </div>
+                    <span class="text-2xl font-bold">
+                        FURN<span class="text-teal-500">HOME</span>
+                    </span>
+                </div>
+                <p class="text-gray-400 mb-6 leading-relaxed">
+                    Sarge that made the hit parade. Guys like us Those were the days. Wouldn't you thankle. Those were the days. Wouldn't you like to get.
+                </p>
+                <div class="space-y-2">
+                    <div class="flex items-center text-gray-400">
+                        <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
+                        </svg>
+                        <span>Call Us: 03 523 456 78</span>
+                    </div>
+                    <div class="flex items-center text-gray-400">
+                        <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                        </svg>
+                        <span>Info@ourdomain.Com</span>
+                    </div>
+                    <div class="flex items-center text-gray-400">
+                        <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span>9° 59 Downtown St, Melbourne, Australia</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Useful Links -->
+            <div>
+                <h3 class="text-lg font-bold mb-6">USEFUL LINKS</h3>
+                <ul class="space-y-3">
+                    <li><a href="#" class="text-gray-400 hover:text-teal-400 transition-colors">About Us</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-teal-400 transition-colors">Our Products</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-teal-400 transition-colors">Customer Support</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-teal-400 transition-colors">Our Shemap</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-teal-400 transition-colors">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Us -->
+            <div>
+                <h3 class="text-lg font-bold mb-6">CONTACT US</h3>
+                <ul class="space-y-3">
+                    <li><a href="#" class="text-gray-400 hover:text-teal-400 transition-colors">Product Recoil</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-teal-400 transition-colors">Gift-Watches</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-teal-400 transition-colors">Return & Exchange</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-teal-400 transition-colors">Shipping Options</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-teal-400 transition-colors">Help & FAQs</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Bottom Section -->
+        <div class="border-t border-gray-800 pt-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="text-gray-400 text-sm mb-4 md:mb-0">
+                    ©2024 ALI BONTS RESERVED
+                </div>
+                <div class="flex flex-wrap justify-center gap-6 text-sm">
+                    <a href="#" class="text-gray-400 hover:text-teal-400 transition-colors">HOME</a>
+                    <a href="#" class="text-gray-400 hover:text-teal-400 transition-colors">SERVICES</a>
+                    <a href="#" class="text-gray-400 hover:text-teal-400 transition-colors">TERMS & CONDITION</a>
+                    <a href="#" class="text-gray-400 hover:text-teal-400 transition-colors">PRIVACY POLICY</a>
+                    <a href="#" class="text-gray-400 hover:text-teal-400 transition-colors">CORRECT US</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
 
 </body>
 </html>
